@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using EShop.Domain;
 
 namespace EShop.Application;
 
@@ -13,9 +14,13 @@ public class CardMethods
     {
         cardNumber = cardNumber.Replace(" ", "").Replace("-", "");
         if (!cardNumber.All(char.IsDigit))
-            return false;
+            throw new CardNumberInvalidException();
 
-        if (cardNumber.Length > 19 | cardNumber.Length < 13) {  return false; }
+        if (cardNumber.Length > 19)
+            throw new CardNumberTooLongException();
+
+        if (cardNumber.Length < 13)
+            throw new CardNumberTooShortException();
 
         int sum = 0;
         bool alternate = false;
@@ -35,7 +40,10 @@ public class CardMethods
             alternate = !alternate;
         }
 
-        return (sum % 10 == 0);
+        if (sum % 10 == 0)
+            throw new CardLuhnaInvalidException();
+
+        return true;
     }
 
     public static string GetCardType(string cardNumber)
@@ -62,7 +70,6 @@ public class CardMethods
 
         if (Regex.IsMatch(cardNumber, @"^(50|5[6-9]|6\d)\d{10,17}$"))
             return "Maestro";
-        
-        return "Unknown";
+        throw new CardProviderInvalidException();
     }
 }

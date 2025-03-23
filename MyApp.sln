@@ -1,18 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75 d17.13
+VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApp", "MyApp\MyApp.csproj", "{B9C9A253-F839-4C35-A3F1-E2F916A731A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopService", "EShopService\EShopService.csproj", "{39D6EE26-0EA5-4998-9E22-611E39692C80}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShop.Application", "EShop.Application\EShop.Application.csproj", "{B6D68767-D996-4031-B4C1-A7B7F209104F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3F975457-131C-4A4B-8D30-844C94D25A94} = {3F975457-131C-4A4B-8D30-844C94D25A94}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShop.Application.Tests", "EShop.Application.Tests\EShop.Application.Tests.csproj", "{936AF78D-8068-4A9E-85C4-0634CE171567}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B6D68767-D996-4031-B4C1-A7B7F209104F} = {B6D68767-D996-4031-B4C1-A7B7F209104F}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShop.Domain", "EShop.Domain\EShop.Domain.csproj", "{3F975457-131C-4A4B-8D30-844C94D25A94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShop.Domain.Tests", "EShop.Domain.Tests\EShop.Domain.Tests.csproj", "{1758E5CA-D19C-46E5-A78A-F2526DA0924E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +43,14 @@ Global
 		{936AF78D-8068-4A9E-85C4-0634CE171567}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{936AF78D-8068-4A9E-85C4-0634CE171567}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{936AF78D-8068-4A9E-85C4-0634CE171567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F975457-131C-4A4B-8D30-844C94D25A94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F975457-131C-4A4B-8D30-844C94D25A94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F975457-131C-4A4B-8D30-844C94D25A94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F975457-131C-4A4B-8D30-844C94D25A94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1758E5CA-D19C-46E5-A78A-F2526DA0924E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1758E5CA-D19C-46E5-A78A-F2526DA0924E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1758E5CA-D19C-46E5-A78A-F2526DA0924E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1758E5CA-D19C-46E5-A78A-F2526DA0924E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
