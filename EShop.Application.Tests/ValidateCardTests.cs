@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EShop.Application;
+using EShop.Domain;
 
 namespace EShop.Application.Tests;
 
@@ -15,26 +16,26 @@ public class ValidateCardTests
     [InlineData("4024 ~ 0071 ~ 6540 ~ 1778")]
     [InlineData("4024.0071.6540.1778")]
     [InlineData("4024 , 0071 , 6540 , 1778")]
-    public void ValidateCard_InvalidCharacters_ReturnsFalse(string cardNumber) 
-    { 
-        var result = CardMethods.ValidateCard(cardNumber);
-        Assert.False(result);
+    public void ValidateCard_InvalidCharacters_ThrowException(string cardNumber) 
+    {
+        var exception = Assert.Throws<CardNumberInvalidException>(() => CardMethods.ValidateCard(cardNumber));
+        Assert.Equal("błąd 400", exception.Message);
     }
 
     [Fact]
-    public void ValidateCard_TooLong_ReturnsFalse()
+    public void ValidateCard_TooLong_ThrowException()
     {
         string cardNumber = "55300164545384180000";
-        var result = CardMethods.ValidateCard(cardNumber);
-        Assert.False(result);
+        var exception = Assert.Throws<CardNumberTooLongException>(() => CardMethods.ValidateCard(cardNumber));
+        Assert.Equal("błąd 414", exception.Message);
     }
     
     [Fact]
-    public void ValidateCard_TooShort_ReturnsFalse() 
+    public void ValidateCard_TooShort_ThrowException() 
     {
         string cardNumber = "553001645453";
-        var result = CardMethods.ValidateCard(cardNumber);
-        Assert.False(result);
+        var exception = Assert.Throws<CardNumberTooShortException>(() => CardMethods.ValidateCard(cardNumber));
+        Assert.Equal("błąd 400", exception.Message);
     }
 
     [Theory]
@@ -43,10 +44,10 @@ public class ValidateCardTests
     [InlineData("4551561343896215")] //5551561443896215
     [InlineData("6131208517986684")] //6131208517986681
     [InlineData("378590193817437")] //378523393817437
-    public void ValidateCard_IncorrectLuhna_ReturnFalse(string cardNumber) 
+    public void ValidateCard_IncorrectLuhna_ThrowException(string cardNumber) 
     {
-        var result = CardMethods.ValidateCard(cardNumber);
-        Assert.False(result);
+        var exception = Assert.Throws<CardLuhnaInvalidException>(() => CardMethods.ValidateCard(cardNumber));
+        Assert.Equal("błąd 400", exception.Message);
     }
 
     [Theory]

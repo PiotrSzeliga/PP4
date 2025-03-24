@@ -17,6 +17,5 @@ public enum CreditCardProvider
         JCB,
         [Display(Name = "Diners Club")]    
         DinersClub,
-        Maestro,
-        Unknown
+        Maestro
 }

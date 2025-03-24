@@ -40,7 +40,7 @@ public class CardMethods
             alternate = !alternate;
         }
 
-        if (sum % 10 == 0)
+        if (sum % 10 != 0)
             throw new CardLuhnaInvalidException();
 
         return true;
@@ -70,6 +70,7 @@ public class CardMethods
 
         if (Regex.IsMatch(cardNumber, @"^(50|5[6-9]|6\d)\d{10,17}$"))
             return "Maestro";
+        
         throw new CardProviderInvalidException();
     }
 }
