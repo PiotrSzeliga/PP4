@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using EShop.Domain;
+using EShop.Application.Services;
+using EShop.Domain.Exceptions.CreditCard;
 
-namespace EShop.Application;
+namespace EShop.Application.Services;
 
-public class CardMethods
+public class CreditCardService : ICreditCardService
 {
-    public static bool ValidateCard(string cardNumber)
+    public bool ValidateCardNumber(string cardNumber)
     {
         cardNumber = cardNumber.Replace(" ", "").Replace("-", "");
         if (!cardNumber.All(char.IsDigit))
@@ -46,7 +47,7 @@ public class CardMethods
         return true;
     }
 
-    public static string GetCardType(string cardNumber)
+    public string GetCardType(string cardNumber)
     {
         cardNumber = cardNumber.Replace(" ", "").Replace("-", "");
 

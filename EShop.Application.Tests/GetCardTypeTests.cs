@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EShop.Application;
+using EShop.Application.Service;
 
 namespace EShop.Application.Tests;
 
@@ -21,7 +21,7 @@ public class GetCardTypeTests
     [InlineData("5131208517986691", "MasterCard")]
     public void GetCardType_ShouldReturnType(string cardNumber, string expectedResult) 
     { 
-        var result = CardMethods.GetCardType(cardNumber);
+        var result = CreditCardService.GetCardType(cardNumber);
         Assert.Equal(expectedResult, result);
     }
 }
