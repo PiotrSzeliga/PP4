@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EShop.Application.Service;
+using EShop.Application.Services;
 using EShop.Domain.Exceptions.CreditCard;
 
 namespace EShop.Application.Tests;
 
-public class ValidateCardTests
+public class Tests
 {
     [Theory]
     [InlineData("4024 ! 0071 ! 6540 ! 1778")]
@@ -16,25 +16,28 @@ public class ValidateCardTests
     [InlineData("4024 ~ 0071 ~ 6540 ~ 1778")]
     [InlineData("4024.0071.6540.1778")]
     [InlineData("4024 , 0071 , 6540 , 1778")]
-    public void ValidateCard_InvalidCharacters_ThrowException(string cardNumber) 
+    public void _InvalidCharacters_ThrowException(string cardNumber) 
     {
-        var exception = Assert.Throws<CardNumberInvalidException>(() => CreditCardService.ValidateCard(cardNumber));
+        var creditCardService = new CreditCardService();
+        var exception = Assert.Throws<CardNumberInvalidException>(() => creditCardService.ValidateCardNumber(cardNumber));
         Assert.Equal("błąd 400", exception.Message);
     }
 
     [Fact]
-    public void ValidateCard_TooLong_ThrowException()
+    public void _TooLong_ThrowException()
     {
         string cardNumber = "55300164545384180000";
-        var exception = Assert.Throws<CardNumberTooLongException>(() => CreditCardService.ValidateCard(cardNumber));
+        var creditCardService = new CreditCardService();
+        var exception = Assert.Throws<CardNumberTooLongException>(() => creditCardService.ValidateCardNumber(cardNumber));
         Assert.Equal("błąd 414", exception.Message);
     }
     
     [Fact]
-    public void ValidateCard_TooShort_ThrowException() 
+    public void _TooShort_ThrowException() 
     {
         string cardNumber = "553001645453";
-        var exception = Assert.Throws<CardNumberTooShortException>(() => CreditCardService.ValidateCard(cardNumber));
+        var creditCardService = new CreditCardService();
+        var exception = Assert.Throws<CardNumberTooShortException>(() => creditCardService.ValidateCardNumber(cardNumber));
         Assert.Equal("błąd 400", exception.Message);
     }
 
@@ -44,9 +47,10 @@ public class ValidateCardTests
     [InlineData("4551561343896215")] //5551561443896215
     [InlineData("6131208517986684")] //6131208517986681
     [InlineData("378590193817437")] //378523393817437
-    public void ValidateCard_IncorrectLuhna_ThrowException(string cardNumber) 
+    public void _IncorrectLuhna_ThrowException(string cardNumber) 
     {
-        var exception = Assert.Throws<CardLuhnaInvalidException>(() => CreditCardService.ValidateCard(cardNumber));
+        var creditCardService = new CreditCardService();
+        var exception = Assert.Throws<CardLuhnaInvalidException>(() => creditCardService.ValidateCardNumber(cardNumber));
         Assert.Equal("błąd 400", exception.Message);
     }
 
@@ -56,9 +60,10 @@ public class ValidateCardTests
     [InlineData("5551561443896215")]
     [InlineData("5131208517986691")]
     [InlineData("378523393817437")]
-    public void ValidateCard_CorrectLuhna_ReturnTrue(string cardNumber)
+    public void _CorrectLuhna_ReturnTrue(string cardNumber)
     {
-        var result = CreditCardService.ValidateCard(cardNumber);
+        var creditCardService = new CreditCardService();
+        var result = creditCardService.ValidateCardNumber(cardNumber);
         Assert.True(result);
     }
 
@@ -68,9 +73,10 @@ public class ValidateCardTests
     [InlineData("4024-0071-6540-1778")]
     [InlineData("4532 2080 2150 4434")]
     [InlineData("4556418049718210")]
-    public void ValidateCard_CorrectNumber_ReturnTrue(string cardNumber)
+    public void _CorrectNumber_ReturnTrue(string cardNumber)
     {
-        var result = CreditCardService.ValidateCard(cardNumber);
+        var creditCardService = new CreditCardService();
+        var result = creditCardService.ValidateCardNumber(cardNumber);
         Assert.True(result);
     }
 }
