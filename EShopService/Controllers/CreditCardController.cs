@@ -2,43 +2,42 @@
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace EShopService.Controllers
+namespace EShopService.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class CreditCardController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CreditCardController : ControllerBase
+
+    // GET: api/<CreditCardController>
+    [HttpGet]
+    public IEnumerable<string> Get()
     {
+        return new string[] { "value1", "value2" };
+    }
 
-        // GET: api/<CreditCardController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+    // GET api/<CreditCardController>/5
+    [HttpGet("{id}")]
+    public string Get(int id)
+    {
+        return "value";
+    }
 
-        // GET api/<CreditCardController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+    // POST api/<CreditCardController>
+    [HttpPost]
+    public void Post([FromBody]string value)
+    {
+    }
 
-        // POST api/<CreditCardController>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
+    // PUT api/<CreditCardController>/5
+    [HttpPut("{id}")]
+    public void Put(int id, [FromBody]string value)
+    {
+    }
 
-        // PUT api/<CreditCardController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<CreditCardController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+    // DELETE api/<CreditCardController>/5
+    [HttpDelete("{id}")]
+    public void Delete(int id)
+    {
     }
 }
